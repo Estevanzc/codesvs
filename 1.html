@@ -1,12 +1,61 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="./1.css">
 </head>
 <body>
-    
+    <div class="back1">
+        <div class="calc">
+            <div class="screen">
+                <div id="screen" class="num1"></div>
+                <div id="screen" class="op"></div>
+                <div id="screen" class="num2"></div>
+                <div id="screen" class="equal"></div>
+                <div id="screen" class="res"></div>
+            </div>
+            <div class="ops">
+                <div id="ops" class="mais" onclick="opc(this)">+</div>
+                <div id="ops" class="menos" onclick="opc(this)">-</div>
+                <div id="ops" class="multi" onclick="opc(this)">*</div>
+                <div id="ops" class="divide" onclick="opc(this)">/</div>
+            </div>
+            <div class="buttons">
+                <button class="reset" onclick="reset()"><strong>Reset</strong></button>
+                <button class="seter" onclick="set()"><strong>Num1</strong></button>
+                <button class="equals" onclick="equal()"><strong>Equals</strong></button>
+            </div>
+            <div class="nums">
+                <div id="part">
+                    <div id="num" class="um" onclick="num(this)">1</div>
+                    <div id="num" class="dois" onclick="num(this)" >2</div>
+                    <div id="num" class="tres" onclick="num(this)" >3</div>
+                </div>
+                <div id="part">
+                    <div id="num" class="quatro" onclick="num(this)" >4</div>
+                    <div id="num" class="cinco" onclick="num(this)" >5</div>
+                    <div id="num" class="seis" onclick="num(this)" >6</div>
+                </div>
+                <div id="part">
+                    <div id="num" class="sete" onclick="num(this)" >7</div>
+                    <div id="num" class="oito" onclick="num(this)" >8</div>
+                    <div id="num" class="nove" onclick="num(this)" >9</div>
+                </div>
+                <div id="part">
+                    <div id="num" class="zero">0</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="back2">
+        <div class="menu">
+            <img class="bcalc" src="https://cdn1.iconfinder.com/data/icons/user-interface-vector-line-elements-set/32/user_interface_website_android_internet_calculator-512.png">
+            <button onclick="calce()">aqui</button>
+        </div>
+    </div>
+    <script src="1.js"></script>
 </body>
 </html>

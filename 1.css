@@ -1,0 +1,126 @@
+.back1, .back2 {
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    width: 100vw;
+    height: 100vh;
+    background-image: linear-gradient(to right, black, rgb(117, 117, 117));
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    font-family: monospace;
+}
+.back1 {
+    z-index: 0;
+}
+.back2 {
+    z-index: 1;
+    justify-content: flex-start;
+}
+.calc {
+    width: 25%;
+    height: 60%;
+    background-color: white;
+    border-radius: 10px;
+}
+.screen {
+    width: 100%;
+    height: 10%;
+    display: flex;
+    flex-flow: row;
+    justify-content: space-evenly;
+}
+.ops {
+    width: 100%;
+    height: 5%;
+    display: flex;
+    flex-flow: row;
+    justify-content: space-evenly;
+    border: 2px solid black;
+    border-left: none;
+    border-right: none;
+}
+#screen {
+    width: 10%;
+    height: 80%;
+    align-self: center;
+    font-size: 15pt;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+#ops {
+    width: 5%;
+    height: 80%;
+    font-size: 15pt;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+.buttons {
+    width: 100%;
+    height: 5%;
+    display: flex;
+    flex-flow: row;
+    justify-content: space-around;
+    align-items: center;
+    padding-top: 1%;
+}
+button {
+    cursor: pointer;
+}
+.nums {
+    width: 100%;
+    height: 80%;
+    display: flex;
+    flex-flow: column;
+    padding-top: 10%;
+}
+#num {
+    width: 10%;
+    height: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20pt;
+    font-weight: bold;
+    cursor: pointer;
+}
+#part {
+    width: 100%;
+    height: 25%;
+    display: flex;
+    justify-content: space-evenly;
+}
+.menu {
+    width: 45%;
+    height: 5%;
+    background-color: white;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+}
+.bcalc {
+    width: 5.5%;
+    height: 100%;
+    background-color: white;
+    border-radius: 10px;
+}
+.bcalc:hover {
+    border: 1px solid gray;
+}
+#back1 {
+    animation: animate1 forwards;
+}
+@keyframes animate1 {
+    from {z-index: 1;}
+    to {z-index: 0;}
+}
+#back2 {
+    animation: animate2 forwards;
+}
+@keyframes animate2 {
+    from {z-index: 0;}
+    to {z-index: 1;}
+}
