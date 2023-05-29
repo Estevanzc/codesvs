@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        .back {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background-image: linear-gradient(black,gray);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .all {
+            max-width: 65pc;
+            width: 100%;
+            height: 40pc;
+            border: 1px solid white;
+            display: flex;
+            align-items: center;
+        }
+        #by {
+            width: 13.75%;
+            height: 100%;
+            background-color: white;
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            gap: 10px;
+            font-size: 30pt;
+        }
+        .board {
+            width: 72.5%;
+            height: 100%;
+            border: 1px solid white;
+            display: flex;
+            flex-flow: wrap;
+            justify-content: center;
+            border: 1px solid black;
+        }
+        #uni {
+            width: 12.5%;
+            height: 12.5%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 30pt;
+        }
+        .um:nth-child(2n), .dois:nth-child(2n-1), .tres:nth-child(2n), .quatro:nth-child(2n-1), .cinco:nth-child(2n), .seis:nth-child(2n-1), .sete:nth-child(2n), .oito:nth-child(2n-1) {
+            background-color: gray;
+        }
+        .um:nth-child(2n-1), .dois:nth-child(2n), .tres:nth-child(2n-1), .quatro:nth-child(2n), .cinco:nth-child(2n-1), .seis:nth-child(2n), .sete:nth-child(2n-1), .oito:nth-child(2n) {
+            background-color: white;
+        }
+        .aum, .adois, .bum, .bdois {
+            width: 45%;
+            height: 100%;
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            flex-flow: column;
+        }
+        .aum>i, .adois>i, .bum>i, .bdois>i {
+            visibility: hidden;
+        }
+    </style>
+</head>
+<body>
+    <div class="back">
+        <div class="all">
+            <div id="by" class="p1d">
+                <div class="aum">
+                    <i class="fa-solid fa-chess-rook"></i>
+                    <i class="fa-solid fa-chess-knight"></i>
+                    <i class="fa-solid fa-chess-bishop"></i>
+                    <i class="fa-solid fa-chess-king"></i>
+                    <i class="fa-solid fa-chess-queen"></i>
+                    <i class="fa-solid fa-chess-bishop"></i>
+                    <i class="fa-solid fa-chess-knight"></i>
+                    <i class="fa-solid fa-chess-rook"></i>
+                </div>
+                <div class="adois">
+                    <i class="fa-solid fa-chess-pawn"></i>
+                    <i class="fa-solid fa-chess-pawn"></i>
+                    <i class="fa-solid fa-chess-pawn"></i>
+                    <i class="fa-solid fa-chess-pawn"></i>
+                    <i class="fa-solid fa-chess-pawn"></i>
+                    <i class="fa-solid fa-chess-pawn"></i>
+                    <i class="fa-solid fa-chess-pawn"></i>
+                    <i class="fa-solid fa-chess-pawn"></i>
+                </div>
+            </div>
+            <div class="board">
+                <div id="uni" onclick="play(this)" class="um"><i id="um[01]" class="fa-sharp fa-regular fa-chess-rook"></i></div>
+                <div id="uni" onclick="play(this)" class="um"><i id="um[02]" class="fa-sharp fa-regular fa-chess-knight"></i></div>
+                <div id="uni" onclick="play(this)" class="um"><i id="um[03]" class="fa-sharp fa-regular fa-chess-bishop"></i></div>
+                <div id="uni" onclick="play(this)" class="um"><i id="um[04]" class="fa-regular fa-chess-king"></i></div>
+                <div id="uni" onclick="play(this)" class="um"><i id="um[05]" class="fa-regular fa-chess-queen"></i></div>
+                <div id="uni" onclick="play(this)" class="um"><i id="um[06]" class="fa-sharp fa-regular fa-chess-bishop"></i></div>
+                <div id="uni" onclick="play(this)" class="um"><i id="um[07]" class="fa-sharp fa-regular fa-chess-knight"></i></div>
+                <div id="uni" onclick="play(this)" class="um"><i id="um[08]" class="fa-sharp fa-regular fa-chess-rook"></i></div>
+                <div id="uni" onclick="play(this)" class="dois"><i id="dois[09]" class="fa-sharp fa-regular fa-chess-pawn"></i></div>
+                <div id="uni" onclick="play(this)" class="dois"><i id="dois[10]" class="fa-sharp fa-regular fa-chess-pawn"></i></div>
+                <div id="uni" onclick="play(this)" class="dois"><i id="dois[11]" class="fa-sharp fa-regular fa-chess-pawn"></i></div>
+                <div id="uni" onclick="play(this)" class="dois"><i id="dois[12]" class="fa-sharp fa-regular fa-chess-pawn"></i></div>
+                <div id="uni" onclick="play(this)" class="dois"><i id="dois[13]" class="fa-sharp fa-regular fa-chess-pawn"></i></div>
+                <div id="uni" onclick="play(this)" class="dois"><i id="dois[14]" class="fa-sharp fa-regular fa-chess-pawn"></i></div>
+                <div id="uni" onclick="play(this)" class="dois"><i id="dois[15]" class="fa-sharp fa-regular fa-chess-pawn"></i></div>
+                <div id="uni" onclick="play(this)" class="dois"><i id="dois[16]" class="fa-sharp fa-regular fa-chess-pawn"></i></div>
+                <div id="uni" onclick="play(this)" class="tres"><i id="tres[17]" class=""></i></div>
+                <div id="uni" onclick="play(this)" class="tres"><i id="tres[18]" class=""></i></div>
+                <div id="uni" onclick="play(this)" class="tres"><i id="tres[19]" class=""></i></div>
+                <div id="uni" onclick="play(this)" class="tres"><i id="tres[20]" class=""></i></div>
+                <div id="uni" onclick="play(this)" class="tres"><i id="tres[21]" class=""></i></div>
+                <div id="uni" onclick="play(this)" class="tres"><i id="tres[22]" class=""></i></div>
+                <div id="uni" onclick="play(this)" class="tres"><i id="tres[23]" class=""></i></div>
+                <div id="uni" onclick="play(this)" class="tres"><i id="tres[24]" class=""></i></div>
+                <div id="uni" onclick="play(this)" class="quatro"><i id="quatro[25]" class=""></i></div>
+                <div id="uni" onclick="play(this)" class="quatro"><i id="quatro[26]" class=""></i></div>
+                <div id="uni" onclick="play(this)" class="quatro"><i id="quatro[27]" class=""></i></div>
+                <div id="uni" onclick="play(this)" class="quatro"><i id="quatro[28]" class=""></i></div>
+                <div id="uni" onclick="play(this)" class="quatro"><i id="quatro[29]" class=""></i></div>
+                <div id="uni" onclick="play(this)" class="quatro"><i id="quatro[30]" class=""></i></div>
+                <div id="uni" onclick="play(this)" class="quatro"><i id="quatro[31]" class=""></i></div>
+                <div id="uni" onclick="play(this)" class="quatro"><i id="quatro[32]" class=""></i></div>
+                <div id="uni" onclick="play(this)" class="cinco"><i id="cinco[33]" class=""></i></div>
+                <div id="uni" onclick="play(this)" class="cinco"><i id="cinco[34]" class=""></i></div>
+                <div id="uni" onclick="play(this)" class="cinco"><i id="cinco[35]" class=""></i></div>
+                <div id="uni" onclick="play(this)" class="cinco"><i id="cinco[36]" class=""></i></div>
+                <div id="uni" onclick="play(this)" class="cinco"><i id="cinco[37]" class=""></i></div>
+                <div id="uni" onclick="play(this)" class="cinco"><i id="cinco[38]" class=""></i></div>
+                <div id="uni" onclick="play(this)" class="cinco"><i id="cinco[39]" class=""></i></div>
+                <div id="uni" onclick="play(this)" class="cinco"><i id="cinco[40]" class=""></i></div>
+                <div id="uni" onclick="play(this)" class="seis"><i id="seis[41]" class=""></i></div>
+                <div id="uni" onclick="play(this)" class="seis"><i id="seis[42]" class=""></i></div>
+                <div id="uni" onclick="play(this)" class="seis"><i id="seis[43]" class=""></i></div>
+                <div id="uni" onclick="play(this)" class="seis"><i id="seis[44]" class=""></i></div>
+                <div id="uni" onclick="play(this)" class="seis"><i id="seis[45]" class=""></i></div>
+                <div id="uni" onclick="play(this)" class="seis"><i id="seis[46]" class=""></i></div>
+                <div id="uni" onclick="play(this)" class="seis"><i id="seis[47]" class=""></i></div>
+                <div id="uni" onclick="play(this)" class="seis"><i id="seis[48]" class=""></i></div>
+                <div id="uni" onclick="play(this)" class="sete"><i id="sete[49]" class="fa-solid fa-chess-pawn"></i></div>
+                <div id="uni" onclick="play(this)" class="sete"><i id="sete[50]" class="fa-solid fa-chess-pawn"></i></div>
+                <div id="uni" onclick="play(this)" class="sete"><i id="sete[51]" class="fa-solid fa-chess-pawn"></i></div>
+                <div id="uni" onclick="play(this)" class="sete"><i id="sete[52]" class="fa-solid fa-chess-pawn"></i></div>
+                <div id="uni" onclick="play(this)" class="sete"><i id="sete[53]" class="fa-solid fa-chess-pawn"></i></div>
+                <div id="uni" onclick="play(this)" class="sete"><i id="sete[54]" class="fa-solid fa-chess-pawn"></i></div>
+                <div id="uni" onclick="play(this)" class="sete"><i id="sete[55]" class="fa-solid fa-chess-pawn"></i></div>
+                <div id="uni" onclick="play(this)" class="sete"><i id="sete[56]" class="fa-solid fa-chess-pawn"></i></div>
+                <div id="uni" onclick="play(this)" class="oito"><i id="oito[57]" class="fa-solid fa-chess-rook"></i></div>
+                <div id="uni" onclick="play(this)" class="oito"><i id="oito[58]" class="fa-solid fa-chess-knight"></i></div>
+                <div id="uni" onclick="play(this)" class="oito"><i id="oito[59]" class="fa-solid fa-chess-bishop"></i></div>
+                <div id="uni" onclick="play(this)" class="oito"><i id="oito[60]" class="fa-solid fa-chess-queen"></i></div>
+                <div id="uni" onclick="play(this)" class="oito"><i id="oito[61]" class="fa-solid fa-chess-king"></i></div>
+                <div id="uni" onclick="play(this)" class="oito"><i id="oito[62]" class="fa-solid fa-chess-bishop"></i></div>
+                <div id="uni" onclick="play(this)" class="oito"><i id="oito[63]" class="fa-solid fa-chess-knight"></i></div>
+                <div id="uni" onclick="play(this)" class="oito"><i id="oito[64]" class="fa-solid fa-chess-rook"></i></div>
+            </div>
+            <div id="by" class="p2d">
+                <div class="bdois">
+                    <i class="fa-sharp fa-regular fa-chess-pawn"></i>
+                    <i class="fa-sharp fa-regular fa-chess-pawn"></i>
+                    <i class="fa-sharp fa-regular fa-chess-pawn"></i>
+                    <i class="fa-sharp fa-regular fa-chess-pawn"></i>
+                    <i class="fa-sharp fa-regular fa-chess-pawn"></i>
+                    <i class="fa-sharp fa-regular fa-chess-pawn"></i>
+                    <i class="fa-sharp fa-regular fa-chess-pawn"></i>
+                    <i class="fa-sharp fa-regular fa-chess-pawn"></i>
+                </div>
+                <div class="bum">
+                    <i class="fa-sharp fa-regular fa-chess-rook"></i>
+                    <i class="fa-sharp fa-regular fa-chess-knight"></i>
+                    <i class="fa-sharp fa-regular fa-chess-bishop"></i>
+                    <i class="fa-regular fa-chess-king"></i>
+                    <i class="fa-regular fa-chess-queen"></i>
+                    <i class="fa-sharp fa-regular fa-chess-bishop"></i>
+                    <i class="fa-sharp fa-regular fa-chess-knight"></i>
+                    <i class="fa-sharp fa-regular fa-chess-rook"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+    <i id="bla" class="fa-sharp fa-regular fa-chess-rook"></i>
+    <script>
+        
+        /*
+        var um1 = document.getElementById("um[01]")
+        var um2 = document.getElementById("um[02]")
+        var um3 = document.getElementById("um[03]")
+        var um4 = document.getElementById("um[04]")
+        var um5 = document.getElementById("um[05]")
+        var um6 = document.getElementById("um[06]")
+        var um7 = document.getElementById("um[07]")
+        var um8 = document.getElementById("um[08]")
+        var dois9 = document.getElementById("dois[09]")
+        var dois10 = document.getElementById("dois[10]")
+        var dois11 = document.getElementById("dois[11]")
+        var dois12 = document.getElementById("dois[12]")
+        var dois13 = document.getElementById("dois[13]")
+        var dois14 = document.getElementById("dois[14]")
+        var dois15 = document.getElementById("dois[15]")
+        var dois16 = document.getElementById("dois[16]")
+        var tres17 = document.getElementById("tres[17]")
+        var tres18 = document.getElementById("tres[18]")
+        var tres19 = document.getElementById("tres[19]")
+        var tres20 = document.getElementById("tres[20]")
+        var tres21 = document.getElementById("tres[21]")
+        var tres22 = document.getElementById("tres[22]")
+        var tres23 = document.getElementById("tres[23]")
+        var tres24 = document.getElementById("tres[24]")
+        var quatro25 = document.getElementById("quatro[25]")
+        var quatro26 = document.getElementById("quatro[26]")
+        var quatro27 = document.getElementById("quatro[27]")
+        var quatro28 = document.getElementById("quatro[28]")
+        var quatro29 = document.getElementById("quatro[29]")
+        var quatro30 = document.getElementById("quatro[30]")
+        var quatro31 = document.getElementById("quatro[31]")
+        var quatro32 = document.getElementById("quatro[32]")
+        var cinco33 = document.getElementById("cinco[33]")
+        var cinco34 = document.getElementById("cinco[34]")
+        var cinco35 = document.getElementById("cinco[35]")
+        var cinco36 = document.getElementById("cinco[36]")
+        var cinco37 = document.getElementById("cinco[37]")
+        var cinco38 = document.getElementById("cinco[38]")
+        var cinco39 = document.getElementById("cinco[39]")
+        var cinco40 = document.getElementById("cinco[40]")
+        var seis41 = document.getElementById("seis[41]")
+        var seis42 = document.getElementById("seis[42]")
+        var seis43 = document.getElementById("seis[43]")
+        var seis44 = document.getElementById("seis[44]")
+        var seis45 = document.getElementById("seis[45]")
+        var seis46 = document.getElementById("seis[46]")
+        var seis47 = document.getElementById("seis[47]")
+        var seis48 = document.getElementById("seis[48]")
+        var sete49 = document.getElementById("sete[49]")
+        var sete50 = document.getElementById("sete[50]")
+        var sete51 = document.getElementById("sete[51]")
+        var sete52 = document.getElementById("sete[52]")
+        var sete53 = document.getElementById("sete[53]")
+        var sete54 = document.getElementById("sete[54]")
+        var sete55 = document.getElementById("sete[55]")
+        var sete56 = document.getElementById("sete[56]")
+        var oito57 = document.getElementById("oito[57]")
+        var oito58 = document.getElementById("oito[58]")
+        var oito59 = document.getElementById("oito[59]")
+        var oito60 = document.getElementById("oito[60]")
+        var oito61 = document.getElementById("oito[61]")
+        var oito62 = document.getElementById("oito[62]")
+        var oito63 = document.getElementById("oito[63]")
+        var oito64 = document.getElementById("oito[64]")
+        var di1 = document.getElementsByClassName("um")
+        var di2 = document.getElementsByClassName("dois")
+        var di3 = document.getElementsByClassName("tres")
+        var di4 = document.getElementsByClassName("quatro")
+        var di5 = document.getElementsByClassName("cinco")
+        var di6 = document.getElementsByClassName("seis")
+        var di7 = document.getElementsByClassName("sete")
+        var di8 = document.getElementsByClassName("oito")
+        var ipos = [0 ,um1, um2, um3, um4, um5, um6, um7, um8, dois9, dois10, dois11, dois12, dois13, dois14, dois15, dois16, tres17, tres18, tres19, tres20, tres21, tres22, tres23, tres24, quatro25, quatro26, quatro27, quatro28, quatro29, quatro30, quatro31, quatro32, cinco33, cinco34, cinco35, cinco36, cinco37, cinco38, cinco39, cinco40, seis41, seis42, seis43, seis44, seis45, seis46, seis47, seis48, sete49, sete50, sete51, sete52, sete53, sete54, sete55, sete56, oito57, oito58, oito59, oito60, oito61, oito62, oito63, oito64]
+        var divpos = [0, di1[0], di1[1], di1[2], di1[3], di1[4], di1[5], di1[6], di1[7], di2[0], di2[1], di2[2], di2[3], di2[4], di2[5], di2[6], di2[7], di3[0], di3[1], di3[2], di3[3], di3[4], di3[5], di3[6], di3[7], di4[0], di4[1], di4[2], di4[3], di4[4], di4[5], di4[6], di4[7], di5[0], di5[1], di5[2], di5[3], di5[4], di5[5], di5[6], di5[7], di6[0], di6[1], di6[2], di6[3], di6[4], di6[5], di6[6], di6[7], di7[0], di7[1], di7[2], di7[3], di7[4], di7[5], di7[6], di7[7], di8[0], di8[1], di8[2], di8[3], di8[4], di8[5], di8[6], di8[7]]
+        var d = 0
+        var e = 0
+        var f = 0
+        var tab = []
+        function play(n) {
+            var a = n
+            n = n.innerHTML
+            for (b = 1; b <= 64; b ++) {
+                if (b < 9 && b % 2 == 0) {
+                        divpos[b].style.backgroundColor = "gray"
+                    } else if (b < 9 && b % 2 != 0) {
+                        divpos[b].style.backgroundColor = "white"
+                    } else if (b < 17 && b % 2 == 0) {
+                        divpos[b].style.backgroundColor = "white"
+                    } else if (b < 17 && b % 2 != 0) {
+                        divpos[b].style.backgroundColor = "gray"
+                    } else if (b < 25 && b % 2 == 0) {
+                        divpos[b].style.backgroundColor = "gray"
+                    } else if (b < 25 && b % 2 != 0) {
+                        divpos[b].style.backgroundColor = "white"
+                    } else if (b < 33 && b % 2 == 0) {
+                        divpos[b].style.backgroundColor = "white"
+                    } else if (b < 33 && b % 2 != 0) {
+                        divpos[b].style.backgroundColor = "gray"
+                    } else if (b < 41 && b % 2 == 0) {
+                        divpos[b].style.backgroundColor = "gray"
+                    } else if (b < 41 && b % 2 != 0) {
+                        divpos[b].style.backgroundColor = "white"
+                    } else if (b < 49 && b % 2 == 0) {
+                        divpos[b].style.backgroundColor = "white"
+                    } else if (b < 49 && b % 2 != 0) {
+                        divpos[b].style.backgroundColor = "gray"
+                    } else if (b < 57 && b % 2 == 0) {
+                        divpos[b].style.backgroundColor = "gray"
+                    } else if (b < 57 && b % 2 != 0) {
+                        divpos[b].style.backgroundColor = "white"
+                    } else if (b <= 64 && b % 2 == 0) {
+                        divpos[b].style.backgroundColor = "white"
+                    } else if (b <= 64 && b % 2 != 0) {
+                        divpos[b].style.backgroundColor = "gray"
+                }
+            }
+            if (n.match(/oito/) == "oito") {
+                d = 49
+                e = 56
+            } else if (n.match(/sete/) == "sete") {
+                d = 41
+                e = 48
+            } else if (n.match(/seis/) == "seis") {
+                d = 33
+                e = 40
+            } else if (n.match(/cinco/) == "cinco") {
+                d = 25
+                e = 32
+            } else if (n.match(/quatro/) == "quatro") {
+                d = 17
+                e = 24
+            } else if (n.match(/tres/) == "tres") {
+                d = 09
+                e = 16
+            } else if (n.match(/dois/) == "dois") {
+                d = 01
+                e = 08
+            } else if (n.match(/um/) == "um") {
+                d = 57
+                e = 64
+            }
+            alert(`${d}\n${e}`)
+            if (n.match(/pawn/)) {
+                if (n.match(/solid/)) {
+                    for (b = 1; b <= 64; b ++) {
+                        if (divpos[b].innerHTML == n) {
+                            if (divpos[b-8].innerHTML.match(/fa/) == "fa") {
+
+                            } else {
+                                divpos[b-8].style.backgroundColor = "blue"
+                            }
+                            if (divpos[b-7].innerHTML.match(/regular/) == "regular") {
+                                divpos[b-7].style.backgroundColor = "blue"
+                            }
+                            if (divpos[b-9].innerHTML.match(/regular/) == "regular") {
+                                divpos[b-9].style.backgroundColor = "blue"
+                            }
+                        }
+                    }
+                } else if (n.match(/sharp/)) {
+                    for (b = 1; b <= 64; b ++) {
+                        if (divpos[b].innerHTML == n) {
+                            if (divpos[b+8].innerHTML.match(/fa/) == "fa") {
+
+                            } else {
+                                divpos[b+8].style.backgroundColor = "blue"
+                            }
+                            if (divpos[b+7].innerHTML.match(/solid/) == "solid") {
+                                divpos[b+7].style.backgroundColor = "blue"
+                            }
+                            if (divpos[b+9].innerHTML.match(/solid/) == "solid") {
+                                divpos[b+9].style.backgroundColor = "blue"
+                            }
+                        }
+                    }
+                }
+            } else if (n.match(/rook/)) {
+                if (n.match(/solid/)) {
+                    for (b = 1; b <= 64; b ++) {
+                        if (divpos[b].innerHTML == n) {
+                            if (divpos[b+8].innerHTML.match(/fa/) == "fa") {
+
+                            } else {
+                                divpos[b+8].style.backgroundColor = "blue"
+                            }
+                            if (divpos[b+7].innerHTML.match(/solid/) == "solid") {
+                                divpos[b+7].style.backgroundColor = "blue"
+                            }
+                            if (divpos[b+9].innerHTML.match(/solid/) == "solid") {
+                                divpos[b+9].style.backgroundColor = "blue"
+                            }
+                            for (a = b - 8; b >= d + 7; b -= 8) {
+                                divpos[b].style.backgroundColor = "blue"
+                            }
+                        }
+                    }
+                } else if (n.match(/sharp/)) {
+                    alert("torre branca")
+                }
+            } else if (n.match(/knight/)) {
+                if (n.match(/solid/)) {
+                    alert("cavalo preto")
+                } else if (n.match(/sharp/)) {
+                    alert("cavalo branco")
+                }
+            } else if (n.match(/bishop/)) {
+                if (n.match(/solid/)) {
+                    alert("bispo preto")
+                } else if (n.match(/sharp/)) {
+                    alert("bispo branco")
+                }
+            } else if (n.match(/king/)) {
+                if (n.match(/solid/)) {
+                    alert("rei preto")
+                } else if (n.match(/regular/)) {
+                    alert("rei branco")
+                }
+            } else if (n.match(/queen/)) {
+                if (n.match(/solid/)) {
+                    alert("rainha preta")
+                } else if (n.match(/regular/)) {
+                    alert("rainha branca")
+                }
+            }
+        }*/
+    </script>
+</body>
+</html>
