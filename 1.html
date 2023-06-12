@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: monospace;
+            font-weight: bold;
+        }
+        .all {
+            width: 1000px;
+            height: 400px;
+            border-radius: 5px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-flow: column;
+            gap: 20px 0px;
+            background-color: rgb(230, 230, 230);
+        }
+        .crono {
+            width: 90%;
+            height: 70%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 60pt;
+            color: red;
+            border: 2px solid black;
+        }
+    </style>
+</head>
+<body>
+    <div class="all">
+        <div class="crono">
+            <div class="minutes">00</div>
+            <p>:</p>
+            <div class="seconds">00</div>
+            <p>:</p>
+            <div class="mili">00</div>
+        </div>
+        <div onclick="click()" class="button">Go</div>
+    </div>
+    <script>
+        var min = document.getElementsByClassName("minutes")[0]
+        var sec = document.getElementsByClassName("seconds")[0]
+        var mili = document.getElementsByClassName("mili")[0]
+        var a = 0
+        var b = 0
+        var c = 0
+        setInterval(() => {
+            a = Number(a)
+            a ++
+            a = a.toString()
+            if (a < 10) {
+                mili.innerHTML = '0' + a
+            } else if (a >= 10 && a < 100) {
+                mili.innerHTML = a
+            } else if (a > 100) {
+                b ++
+                a = 0
+                if (b < 10) {
+                    sec.innerHTML = '0' + b
+                } else {
+                    sec.innerHTML = b
+                }
+            } else if (b > 58) {
+                c ++
+                b = 0
+                sec.innerHTML = '00'
+                a = 0
+                if (c < 10) {
+                    min.innerHTML = '0' + c
+                } else {
+                    min.innerHTML = c
+                }
+            }
+        }, 10);
+    </script>
+</body>
+</html>
