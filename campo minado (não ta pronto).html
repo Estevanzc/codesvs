@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            user-select: none;
+        }
+        .back {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-size: cover;
+            background-image: linear-gradient(to right, black, grey);
+        }
+        .board {
+            width: 35%;
+            height: 70%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 1px 1px 5px black;
+        }
+        .unidade {
+            width: 5%;
+            height: 5%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="back">
+        <div class="board"></div>
+    </div>
+    <script>
+        var board = document.getElementsByClassName("board")[0]
+        var tab = []
+        var numm = 0
+        for (var i = 0; i <= 19; i ++) {
+            tab.push([])
+            for (var i2 = 0; i2 <= 19; i2 ++) {
+                var element = document.createElement("div")
+                element.classList.add("unidade")
+                element.addEventListener("click", function() {
+                    play(this)
+                })
+                var bomba = Number.parseInt(Math.random()*10)
+                if (bomba <= 5) {
+                    element.name = "0"
+                } else {
+                    element.name = "1"
+                    element.style.backgroundColor = "red"
+                }
+                tab[i].push(element)
+                board.appendChild(element)
+            }
+        }
+        function search() {
+            for (var li in tab) {
+                for (var co in tab[li]) {
+                    if (tab[li][co].name == 0) {
+                        var bomba = 0
+                        if (li > 0) {
+                            if (co > 0) {
+                                if (tab[li-1][co-1].name == 1) {
+                                    bomba ++
+                                }
+                            }
+                            if (tab[li-1][co].name == 1) {
+                                bomba ++
+                            }
+                        }
+                        if (co > 0) {
+                            if (tab[li][co-1].name == 1) {
+                                bomba ++
+                            }
+                        }
+                        if (li < 19) {
+                            if (co > 0) {
+                                if (tab[li+1][co-1].name == 1) {
+                                    bomba ++
+                                }
+                            }
+                        }
+                        if (bomba != 0) {
+                            tab[li][co].innerHTML = bomba
+                        }
+                    }
+                }
+            }
+        }
+        search()
+    </script>
+</body>
+</html>
