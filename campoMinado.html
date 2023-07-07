@@ -155,22 +155,24 @@
             }
         }
         function azul(element) {
-            element.style.backgroundColor = "blue"
-            bn--
-            bombas.innerHTML = bn
-            var end = true
-            if (bn == 0) {
-                for (var li in tab) {
-                    li = Number(li)
-                    for (var co in tab[li]) {
-                        co = Number(co)
-                        if (tab[li][co].backgroundColor == "blue" && tab[li][co].dataset.bomb == 0) {
-                            end = false
+            if (element.style.backgroundColor != "white") {
+                element.style.backgroundColor = "blue"
+                bn--
+                bombas.innerHTML = bn
+                var end = true
+                if (bn == 0) {
+                    for (var li in tab) {
+                        li = Number(li)
+                        for (var co in tab[li]) {
+                            co = Number(co)
+                            if (tab[li][co].backgroundColor == "blue" && tab[li][co].dataset.bomb == 0) {
+                                end = false
+                            }
                         }
                     }
-                }
-                if (end) {
-                    alert("ganhaste")
+                    if (end) {
+                        alert("ganhaste")
+                    }
                 }
             }
         }
