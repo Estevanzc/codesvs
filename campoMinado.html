@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+        integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <style>
+        * {
+            user-select: none;
+        }
+
+        .back {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-flow: column;
+            gap: 20px 0px;
+            background-size: cover;
+            background-image: linear-gradient(to right, black, grey);
+        }
+
+        .board {
+            width: 35%;
+            height: 70%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            background-color: white;
+            border-radius: 5px;
+            box-shadow: 1px 1px 5px black;
+        }
+
+        .unidade {
+            width: 5%;
+            height: 5%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            background-color: rgba(165, 165, 165, 0.5);
+            box-shadow: 1px 1px 1px black;
+        }
+
+        .bombas {
+            width: 15%;
+            height: 10%;
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            border-radius: 5px;
+            box-shadow: 1px 1px 5px black;
+            background-color: white;
+        }
+
+        .bombas>*>i {
+            font-size: 40pt;
+        }
+
+        .bombas>* {
+            width: 50%;
+            height: 100%;
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+            font-size: 30pt;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .um {
+            border-top-left-radius: 5px;
+            border-bottom-left-radius: 5px;
+            color: red;
+        }
+
+        .dois {
+            border-top-right-radius: 5px;
+            border-bottom-right-radius: 5px;
+        }
+
+        .bombas>*:hover {
+            transition: background-color 0.25s ease;
+            background-color: rgb(228, 228, 228);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="back">
+        <div class="bombas">
+            <div class="um" onclick="mode(this)" id="1">
+                <i id="arrow" class="fa-solid fa-arrow-pointer"></i>
+            </div>
+            <div class="dois" onclick="mode(this)" id="2">
+                <i id="b" class="fa-solid fa-bomb"></i>
+                <p class="numb">00</p>
+            </div>
+        </div>
+        <div class="board"></div>
+    </div>
+    <script>
+        var board = document.getElementsByClassName("board")[0]
+        var bombas = document.getElementsByClassName("numb")[0]
+        var tab = []
+        var numm = 0
+        var bn = 0
+        var modo = 1
+        for (var i = 0; i <= 19; i++) {
+            tab.push([])
+            var li = i
+            for (var i2 = 0; i2 <= 19; i2++) {
+                var element = document.createElement("div")
+                element.classList.add("unidade")
+                element.addEventListener("click", function () {
+                    play(this)
+                })
+                var bomba = Number.parseInt(Math.random() * 100)
+                var co = i2
+                if (bomba > 25) {
+                    element.dataset.bomb = '0'
+                } else {
+                    element.dataset.bomb = '1'
+                    bn++
+                }
+                element.dataset.casa = 0
+                element.dataset.y = li
+                element.dataset.x = co
+                tab[i].push(element)
+                board.appendChild(element)
+            }
+        }
+        bombas.innerHTML = bn
+        var left = bn
+        function mode(element) {
+            var arrow = document.getElementById("arrow")
+            var b = document.getElementById("b")
+            if (element.id == 1) {
+                modo = 1
+                arrow.style.color = "red"
+                b.style.color = "black"
+            } else {
+                modo = 2
+                arrow.style.color = "black"
+                b.style.color = "red"
+            }
+        }
+        function azul(element) {
+            element.style.backgroundColor = "blue"
+            bn--
+            bombas.innerHTML = bn
+            var end = true
+            if (bn == 0) {
+                for (var li in tab) {
+                    li = Number(li)
+                    for (var co in tab[li]) {
+                        co = Number(co)
+                        if (tab[li][co].backgroundColor == "blue" && tab[li][co].dataset.bomb == 0) {
+                            end = false
+                        }
+                    }
+                }
+                if (end) {
+                    alert("ganhaste")
+                }
+            }
+        }
+        function remove(element) {
+            element.style.backgroundColor = "rgba(165, 165, 165, 0.5)"
+            element.style.boxShadow = "1px 1px 5px black"
+            bn++
+            bombas.innerHTML = bn
+        }
+        function jogada(element) {
+            var li = Number(element.dataset.y)
+            var co = Number(element.dataset.x)
+            if (tab[li][co].dataset.bomb == 0 && tab[li][co].dataset.casa == 0) {
+                tab[li][co].dataset.casa = 1
+                var bomba = 0
+                if (li > 0) {
+                    if (co > 0) {
+                        if (tab[li - 1][co - 1].dataset.bomb == 1) {
+                            bomba++
+                        }
+                    }
+                    if (tab[li - 1][co].dataset.bomb == 1) {
+                        bomba++
+                    }
+                    if (co < 19) {
+                        if (tab[li - 1][co + 1].dataset.bomb == 1) {
+                            bomba++
+                        }
+                    }
+                }
+                if (co > 0) {
+                    if (tab[li][co - 1].dataset.bomb == 1) {
+                        bomba++
+                    }
+                }
+                if (li < 19) {
+                    if (co > 0) {
+                        if (tab[li + 1][co - 1].dataset.bomb == 1) {
+                            bomba++
+                        }
+                    }
+                    if (tab[li + 1][co].dataset.bomb == 1) {
+                        bomba++
+                    }
+                    if (co < 19) {
+                        if (tab[li + 1][co + 1].dataset.bomb == 1) {
+                            bomba++
+                        }
+                    }
+                }
+                if (co < 19) {
+                    if (tab[li][co + 1].dataset.bomb == 1) {
+                        bomba++
+                    }
+                }
+                if (bomba != 0) {
+                    element.innerHTML = bomba
+                    element.style.backgroundColor = "white"
+                } else {
+                    element.style.backgroundColor = "white"
+                    if (li > 0) {
+                        if (co > 0) {
+                            play(tab[li - 1][co - 1])
+                        }
+                        play(tab[li - 1][co])
+                        if (co < 19) {
+                            play(tab[li - 1][co + 1])
+                        }
+                    }
+                    if (co > 0) {
+                        play(tab[li][co - 1])
+                    }
+                    if (li < 19) {
+                        if (co > 0) {
+                            play(tab[li + 1][co - 1])
+                        }
+                        play(tab[li + 1][co])
+                        if (co < 19) {
+                            play(tab[li + 1][co + 1])
+                        }
+                    }
+                    if (co < 19) {
+                        play(tab[li][co + 1])
+                    }
+                }
+            } else if (tab[li][co].dataset.bomb == 1) {
+                element.style.backgroundColor = "red"
+                alert("perdeste")
+                location.reload()
+            }
+        }
+        function play(element) {
+            if (modo == 1) {
+                jogada(element)
+            } else {
+                if (element.style.backgroundColor != "blue") {
+                    azul(element)
+                } else {
+                    remove(element)
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>
