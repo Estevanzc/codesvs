@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .back {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: monospace;
+            background-image: linear-gradient(to right, black, gray);
+        }
+
+        .middle {
+            width: 20%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-flow: column;
+        }
+
+        .board {
+            width: 100%;
+            height: 40%;
+            border-radius: 5px;
+            box-shadow: 1px 1px 5px black;
+            border: 2px solid black;
+        }
+
+        .desc {
+            width: 100%;
+            height: 5%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: white;
+            font-size: 15pt;
+            font-weight: bold;
+        }
+
+        .menu {
+            width: 100%;
+            height: 25%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-flow: column;
+        }
+
+        .menu>* {
+            width: 50%;
+            height: 15%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-weight: bold;
+            gap: 0px 15px;
+            background-color: white;
+        }
+        .um {
+            color: red;
+            border-top-right-radius: 5px;
+            border-top-left-radius: 5px;
+        }
+        .dois {
+            color: green;
+        }
+        .tres {
+            color: blue;
+            border-bottom-right-radius: 5px;
+            border-bottom-left-radius: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="back">
+        <div class="middle">
+            <div class="board"></div>
+            <div class="desc">RGB (0, 0, 0)</div>
+            <div class="menu">
+                <div class="um">
+                    <p>R</p>
+                    <input onmousemove="mudou(this)" id="r" type="range">
+                </div>
+                <div class="dois">
+                    <p>G</p>
+                    <input onmousemove="mudou(this)" id="g" type="range">
+                </div>
+                <div class="tres">
+                    <p>B</p>
+                    <input onmousemove="mudou(this)" id="b" type="range">
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        var a = document.getElementsByClassName("board")[0]
+        var desc = document.getElementsByClassName("desc")[0]
+        var r = 50
+        var g = 50
+        var b = 50
+        function mudou(element) {
+            if (element.id == "r") {
+                r = element.value
+            } else if (element.id == "g") {
+                g = element.value
+            } else if (element.id == "b") {
+                b = element.value
+            }
+            desc.innerHTML = `RGB (${r}, ${g}, ${b})`
+            a.style.backgroundColor = `rgb(${r}, ${g}, ${b})`
+        }
+    </script>
+</body>
+
+</html>
